@@ -40,9 +40,9 @@ public class Game extends JPanel implements Runnable{
 	private gameState nextState;
 	
 	public static void main(String[]args) {
+		System.out.print("Hello World!\n");
 		Game game = new Game();
 		game.game();
-		System.out.print("Hello World!\n");
 	}
 	
 	private void game() {
