@@ -11,7 +11,7 @@ public class Bullet extends GameObject{
 	private int y;
 	private int damage;
 	
-	private static final int speed = 1;
+//	private static final int speed = 1;
 	private static final int size = 10;
 	
 	private double toMoveX = 0;
@@ -36,8 +36,8 @@ public class Bullet extends GameObject{
 		
 //		velY = (y-destinationY)*velX/(x-destinationX);
 		
-		int deltaX = x - destinationX;
-		int deltaY = y - destinationY;
+//		int deltaX = x - destinationX;
+//		int deltaY = y - destinationY;
 		
 		
 	}

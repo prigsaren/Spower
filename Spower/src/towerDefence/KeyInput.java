@@ -8,8 +8,6 @@ public class KeyInput implements KeyListener{
 	Game game;
 	Editor editor;
 	
-	private String name;
-	
 	public KeyInput(Game game, Editor editor) {
 		this.game = game;
 		this.editor = editor;
