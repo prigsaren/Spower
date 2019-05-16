@@ -1,14 +1,28 @@
-package towerDefence;
+package menues;
 
 import java.awt.*;
+import java.io.File;
 import java.util.*;
 import javax.swing.*;
 
-public class MapSelector {
+import tools.Button;
+import tools.Painter;
+
+public class MapSelector extends Menu{
 	
 	private int slide = 0;
 	
 	private LinkedList<String> componentList = new LinkedList<>();
+	
+//	private Button forwardButton = new Button();
+//	private Button backwardButton = new Button();
+//	private Button exitButton= new Button();
+//	private Button newButton = new Button();
+	private Button map1Button = new Button(547 , 372, 1338,411, FIRST_BUTTON);
+	private Button map2Button = new Button(547,501,1338,599, SECOND_BUTTON);
+	private Button map3Button = new Button(547, 631, 1338, 729, THIRD_BUTTON);
+	
+	private Button[] buttons = {map1Button, map2Button, map3Button};
 	
 	private Image chooseMap = new ImageIcon("Graphics\\chooseMap.png").getImage();
 	private Image chooseMapLeft = new ImageIcon("Graphics\\chooseMapLeft.png").getImage();
@@ -18,13 +32,11 @@ public class MapSelector {
 	
 	private Painter painter = new Painter();
 	
-	public static final int NONE = 0;
-	public static final int LEFT = 1;
-	public static final int RIGHT = 2;
-	public static final int BACK = 3;
-	public static final int NEW = 4;
 	
-	private int pressed;
+	public MapSelector() {
+		super.setButtons(buttons);
+	}
+	
 	
 	public void render(Graphics g, int x, int y, int width, int height) {
 		
@@ -48,27 +60,35 @@ public class MapSelector {
 			painter.drawString(g, componentList.get(slide*3+2).replaceAll(".txt", ""), (int) Math.round(x+width * (double)150/1060), (int) Math.round(y+height * (double)470/640), (int)Math.round(width * (double)35/1060), (int)Math.round(height * (double)50/640));
 	}
 	
-	public void forward() {
-		if(slide < componentList.size()/3)
-			slide ++;
-	}
-	public void backward() {
-		if(slide > 0)
-			slide --;
-	}
-	public void setPressed(int pressed) {
-		this.pressed = pressed;
+	public void findMaps() {
+		File folder = new File("Maps");
+		File[] listOfFiles = folder.listFiles();
+		LinkedList<String> tempList = new LinkedList<>();
+		
+		for(File file : listOfFiles) {
+			if(file.isFile() && file.getName().contains(".txt")) 
+				tempList.add(file.getName());
+		}
+		
+		for(int i2 = 0; i2 < tempList.size(); i2++) {
+			long time = 0;
+			int nr = 0;
+			
+			for(int i = 0; i < tempList.size(); i++) {
+				File file = new File("Maps\\" + tempList.get(i));
+				
+				if(file.lastModified() > time || time == 0) {
+					nr = i;
+					time = file.lastModified();
+				}
+			}
+			componentList.add(tempList.get(nr));
+			tempList.remove(nr);
+			i2--;
+		
+		}
+		
 	}
 	
-	public void addComponents(String component) {
-		componentList.add(component);
-	}
-	public void clearList() {
-		componentList.clear();
-	}
-	public String getMap(int nr) {
-		if(slide*3 + nr<componentList.size())
-			return componentList.get(slide+nr);
-		return null;
-	}
+	
 }

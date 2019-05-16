@@ -2,18 +2,23 @@ package towerDefence;
 
 import java.awt.event.*;
 import java.util.LinkedList;
-
+import menues.MenuDirector;
 import objects.*;
 import objects.GameObject.*;
+import tools.Button;
+import towerDefence.Game.gameState;
 
 
 public class Mouse implements MouseListener{
 	
-	
+	private MenuDirector menuDirector;
 	private Hud hud;
 	private Map map;
 	private Handler handler;
 	private Window window;
+	private Game game;
+	
+	
 	private ID id;
 	
 	private int x, y, selected;
@@ -22,12 +27,13 @@ public class Mouse implements MouseListener{
 	private int blockSize = Window.WIDTH/17;
 	
 	
-	private LinkedList<Button> buttonList = new LinkedList<>();
 	private int pressedButtonNr = -1, chosenButton = -1;
 		
-	public Mouse(Hud hud, Map map) {
+	public Mouse(Hud hud, Map map, MenuDirector menuDirector, Game game) {
 		this.hud = hud;
 		this.map = map;
+		this.menuDirector = menuDirector;
+		this.game = game;
 	}
 	
 	@Override
@@ -47,24 +53,18 @@ public class Mouse implements MouseListener{
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		System.out.println(e.getX() +"   " + e.getY());
+//		System.out.println(e.getX() +"   " + e.getY());
 		
-		for(int i = 0; i < buttonList.size(); i++) {
-			if(buttonList.get(i).isOnButton(e.getX(), e.getY())) {
-				pressedButtonNr = i;
-				break;
-			}
-		}
+		if(game.getGameState() == gameState.menu)
+			menuDirector.buttonPressed(e.getX(), e.getY());
 		
 		
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		if(pressedButtonNr != -1 && buttonList.get(pressedButtonNr).isOnButton(e.getX(), e.getY()))
-				chosenButton = pressedButtonNr;
-		pressedButtonNr = -1;
-		
+		if(game.getGameState() == gameState.menu)
+			menuDirector.buttonReleased(e.getX(), e.getY());
 	}
 	
 	public boolean canPlace() {
@@ -94,18 +94,6 @@ public class Mouse implements MouseListener{
 	public void setWindow(Window window) {
 		this.window = window;
 	}
-	
-	public void resetButtonList() {
-		chosenButton = -1;
-		buttonList.clear();
-	}
-	public void addButton(Button button) {
-		buttonList.add(button);
-	}
-	public int getPressedButtonNr() {
-		return pressedButtonNr;
-	}
-	public int getChosenButton() {
-		return chosenButton;
-	}
+
+
 }

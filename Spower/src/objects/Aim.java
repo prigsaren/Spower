@@ -4,6 +4,7 @@ package objects;
 import java.awt.*;
 import java.awt.geom.*;
 
+import tools.C;
 import towerDefence.*;
 
 public abstract class Aim extends Defence{

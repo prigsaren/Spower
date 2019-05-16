@@ -1,4 +1,6 @@
-package towerDefence;
+package tools;
+
+import towerDefence.Line;
 
 public class Button {
 	
@@ -7,17 +9,20 @@ public class Button {
 	private int y;
 	private int lastX;
 	private int lastY;
+	private int usageNr;
 	
-	public Button(Line[] line, int x) {
+	public Button(Line[] line, int x, int usageNr) {
 		this.line = line;
 		this.x = x;
+		this.usageNr = usageNr;
 	}
 	
-	public Button(int x, int y, int lastX, int lastY) {
+	public Button(int x, int y, int lastX, int lastY, int usageNr) {
 		this.x = x;
 		this.y = y;
 		this.lastX = lastX;
 		this.lastY = lastY;
+		this.usageNr = usageNr;
 	}
 	
 	public boolean isOnButton(int mousePosX, int mousePosY) {
@@ -26,5 +31,9 @@ public class Button {
 		else if(mousePosX > x && mousePosX < lastX && mousePosY > y && mousePosY < lastY)
 			return true;
 		return false;
+	}
+	
+	public int getusageNr() {
+		return usageNr;
 	}
 }

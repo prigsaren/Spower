@@ -6,6 +6,8 @@ import java.util.Scanner;
 
 import javax.swing.*;
 
+import tools.Painter;
+
 public class Editor {
 	
 	private Image hud = new ImageIcon("Graphics\\editor.png").getImage();

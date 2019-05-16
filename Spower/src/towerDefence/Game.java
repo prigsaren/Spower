@@ -1,10 +1,8 @@
 package towerDefence;
 
 import java.awt.*;
-import java.io.File;
-import java.util.LinkedList;
-
 import javax.swing.*;
+import menues.MenuDirector;
 import objects.*;
 
 public class Game extends JPanel implements Runnable{
@@ -12,10 +10,10 @@ public class Game extends JPanel implements Runnable{
 
 	Map map = new Map();
 	Hud hud = new Hud();
-	Mouse mouse = new Mouse(hud, map);
-	StartMenu startMenu = new StartMenu(this, mouse);
+	MenuDirector menuDirector = new MenuDirector(this);
 	Handler handler = new Handler();
 	Editor editor = new Editor();
+	Mouse mouse = new Mouse(hud, map, menuDirector, this);
 	KeyInput keyInput = new KeyInput(this, editor);
 	Window window = new Window(this, mouse, keyInput);
 	
@@ -29,14 +27,13 @@ public class Game extends JPanel implements Runnable{
 	private boolean spawn = false;
 	
 	public enum gameState{
-		startMenu(),
 		game(),
-		pauseMenu(),
 		editor(),
-		mapSelector();
+		menu(),
+		pauseMenu();
 	}
 	
-	private gameState state = gameState.startMenu;
+	private gameState state = gameState.menu;
 	private gameState nextState;
 	
 	public static void main(String[]args) {
@@ -47,8 +44,6 @@ public class Game extends JPanel implements Runnable{
 	
 	private void game() {
 		mouse.setWindow(window);
-		startMenu.setWindow(window);
-		startMenu.start();
 		
 		Thread graphics = new Thread(this);
 		graphics.start();
@@ -56,38 +51,6 @@ public class Game extends JPanel implements Runnable{
 		loop();
 	}
 
-	public void findMaps() {
-
-		startMenu.clearMapSelectorComponentList();
-		
-		File folder = new File("Maps");
-		File[] listOfFiles = folder.listFiles();
-		LinkedList<String> tempList = new LinkedList<>();
-		
-		for(File file : listOfFiles) {
-			if(file.isFile() && file.getName().contains(".txt")) 
-				tempList.add(file.getName());
-		}
-		
-		for(int i2 = 0; i2 < tempList.size(); i2++) {
-			long time = 0;
-			int nr = 0;
-			
-			for(int i = 0; i < tempList.size(); i++) {
-				File file = new File("Maps\\" + tempList.get(i));
-				
-				if(file.lastModified() > time || time == 0) {
-					nr = i;
-					time = file.lastModified();
-				}
-			}
-			startMenu.addComponentToSelector(tempList.get(nr));
-			tempList.remove(nr);
-			i2--;
-		
-		}
-		
-	}
 	
 	public void paint(Graphics g) {
 		super.paint(g);	
@@ -96,8 +59,8 @@ public class Game extends JPanel implements Runnable{
 			handler.render(g);
 			hud.render(g);
 		}
-		else if(state == gameState.startMenu || state == gameState.mapSelector) {
-			startMenu.render(g);
+		else if(state == gameState.menu ) {
+			menuDirector.render(g);
 		}
 		else if(state == gameState.editor)
 			editor.render(g);
@@ -109,8 +72,8 @@ public class Game extends JPanel implements Runnable{
 			mouse.canPlace();
 			handler.tick();
 		}
-		else if(state == gameState.startMenu||state == gameState.mapSelector) {
-			startMenu.tick();
+		else if(state == gameState.menu) {
+			menuDirector.tick();
 		}
 		
 		else if(state == gameState.editor) {
@@ -119,13 +82,7 @@ public class Game extends JPanel implements Runnable{
 	}
 	public void setGameState(gameState state){
 		this.state = state;
-		
-		if(state == gameState.startMenu)
-			startMenu.start();
-		
-		if (state == gameState.mapSelector) {
-			findMaps();
-		}
+	
 	}
 	public void setNextGameState(gameState nextState) {
 		this.nextState = nextState;
