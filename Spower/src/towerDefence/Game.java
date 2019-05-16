@@ -54,7 +54,7 @@ public class Game extends JPanel implements Runnable{
 		
 		loop();
 	}
-	
+
 	public void findMaps() {
 
 		startMenu.clearMapSelectorComponentList();
