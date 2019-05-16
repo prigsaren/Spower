@@ -8,18 +8,22 @@ import towerDefence.Game.gameState;
 
 public class StartMenu{
 	
-	public static final int NOTHING = 0;
-	public static final int PLAY = 1;
-	public static final int EDITOR = 2;
-	public static final int CREDITS = 3;
+	public static final int NOTHING = -1;
+	public static final int PLAY = 0;
+	public static final int EDITOR = 1;
+	public static final int CREDITS = 2;
+	
+	private final Button playButton = new Button(559,545,1360,615);
+	private final Button editorButton = new Button(560,671,1361,741);
+	private final Button creditsButton = new Button(560,796,1361,866);
 	
 	
-	private Image deafult = new ImageIcon("titleScreen_deafult.png").getImage();
-	private Image playPressed = new ImageIcon("titleScreen_play.png").getImage();
-	private Image editorPressed = new ImageIcon("titleScreen_Editor.png").getImage();
-	private Image creditsPressed = new ImageIcon("titleScreen_Credits.png").getImage();
+	private Image deafult = new ImageIcon("Graphics\\titleScreen_deafult.png").getImage();
+	private Image playPressed = new ImageIcon("Graphics\\titleScreen_play.png").getImage();
+	private Image editorPressed = new ImageIcon("Graphics\\titleScreen_Editor.png").getImage();
+	private Image creditsPressed = new ImageIcon("Graphics\\titleScreen_Credits.png").getImage();
 	
-	private Image stars = new ImageIcon("stars.png").getImage();
+	private Image stars = new ImageIcon("Graphics\\stars.png").getImage();
 	
 	private double xDouble = 0;
 	private int x;
@@ -30,10 +34,12 @@ public class StartMenu{
 	private Window window;
 	private Game game;
 	private MapSelector mapSelector;
+	private Mouse mouse;
 	
-	public StartMenu(Game game) {
+	public StartMenu(Game game, Mouse mouse) {
 		this.game = game;
 		mapSelector = new MapSelector();
+		this.mouse = mouse;
 	}
 	
 	public void setWindow(Window window) {
@@ -45,6 +51,7 @@ public class StartMenu{
 		g.drawImage(stars, x + window.getWidth(), 0, window.getWidth(), window.getHeight(), null);
 		
 		if(game.getGameState() == gameState.startMenu) {
+			pressed = mouse.getPressedButtonNr();
 			if(pressed == NOTHING)
 				g.drawImage(deafult, 0, 0, window.getWidth(), window.getHeight(), null);
 			
@@ -73,7 +80,27 @@ public class StartMenu{
 			x -= (int) xDouble;
 			xDouble -= (int)xDouble;
 		}
+		switch(mouse.getChosenButton()) {
+			case 0:
+				game.setGameState(gameState.mapSelector);
+				game.setNextGameState(gameState.game);
+				mouse.resetButtonList();
+				break;
+			case 1:
+				game.setGameState(gameState.mapSelector);
+				game.setNextGameState(gameState.editor);
+				mouse.resetButtonList();
+//			case 2:
+//				game.setGameState(gameState.credits);
+		}
 	}
+	public void start() {
+		mouse.resetButtonList();
+		mouse.addButton(playButton);
+		mouse.addButton(editorButton);
+		mouse.addButton(creditsButton);
+	}
+	
 	public void setPressed(int pressed) {
 		this.pressed = pressed;
 	}

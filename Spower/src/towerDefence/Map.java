@@ -16,8 +16,8 @@ public class Map {
 	
 	Random rand = new Random();
 
-	private Image back = new ImageIcon("back2.png").getImage();
-	private Image pathImage = new ImageIcon("path.png").getImage();
+	private Image back = new ImageIcon("Graphics\\back2.png").getImage();
+	private Image pathImage = new ImageIcon("Graphics\\path.png").getImage();
 
 	private int blockSize = Window.WIDTH/17;
 	

@@ -10,13 +10,13 @@ import objects.*;
 public class Game extends JPanel implements Runnable{
 	private static final long serialVersionUID = -3861007013616873859L;
 
-	StartMenu startMenu = new StartMenu(this);
 	Map map = new Map();
 	Hud hud = new Hud();
+	Mouse mouse = new Mouse(hud, map);
+	StartMenu startMenu = new StartMenu(this, mouse);
 	Handler handler = new Handler();
 	Editor editor = new Editor();
 	KeyInput keyInput = new KeyInput(this, editor);
-	Mouse mouse = new Mouse(hud, map, handler, this, startMenu, editor);
 	Window window = new Window(this, mouse, keyInput);
 	
 	Enemy[] Enemy = new Enemy[1000];
@@ -48,6 +48,7 @@ public class Game extends JPanel implements Runnable{
 	private void game() {
 		mouse.setWindow(window);
 		startMenu.setWindow(window);
+		startMenu.start();
 		
 		Thread graphics = new Thread(this);
 		graphics.start();
@@ -118,6 +119,10 @@ public class Game extends JPanel implements Runnable{
 	}
 	public void setGameState(gameState state){
 		this.state = state;
+		
+		if(state == gameState.startMenu)
+			startMenu.start();
+		
 		if (state == gameState.mapSelector) {
 			findMaps();
 		}

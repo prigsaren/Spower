@@ -10,11 +10,11 @@ public class MapSelector {
 	
 	private LinkedList<String> componentList = new LinkedList<>();
 	
-	private Image chooseMap = new ImageIcon("chooseMap.png").getImage();
-	private Image chooseMapLeft = new ImageIcon("chooseMapLeft.png").getImage();
-	private Image chooseMapRight = new ImageIcon("chooseMapRight.png").getImage();
-	private Image chooseMapBack = new ImageIcon("chooseMapBack.png").getImage();
-	private Image chooseMapNew = new ImageIcon("chooseMapNew.png").getImage();
+	private Image chooseMap = new ImageIcon("Graphics\\chooseMap.png").getImage();
+	private Image chooseMapLeft = new ImageIcon("Graphics\\chooseMapLeft.png").getImage();
+	private Image chooseMapRight = new ImageIcon("Graphics\\chooseMapRight.png").getImage();
+	private Image chooseMapBack = new ImageIcon("Graphics\\chooseMapBack.png").getImage();
+	private Image chooseMapNew = new ImageIcon("Graphics\\chooseMapNew.png").getImage();
 	
 	private Painter painter = new Painter();
 	

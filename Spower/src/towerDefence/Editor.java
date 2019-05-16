@@ -8,10 +8,10 @@ import javax.swing.*;
 
 public class Editor {
 	
-	private Image hud = new ImageIcon("editor.png").getImage();
-	private Image hudDone = new ImageIcon("editorDone.png").getImage();
-	private Image pathImage = new ImageIcon("path.png").getImage();
-	private Image startPathImage = new ImageIcon("startPath.png").getImage();
+	private Image hud = new ImageIcon("Graphics\\editor.png").getImage();
+	private Image hudDone = new ImageIcon("Graphics\\editorDone.png").getImage();
+	private Image pathImage = new ImageIcon("Graphics\\path.png").getImage();
+	private Image startPathImage = new ImageIcon("Graphics\\startPath.png").getImage();
 	
 	private final int blockSize = Window.WIDTH/17;
 	private final int hudWidth = Window.WIDTH*2/17 + Window.WIDTH%17;

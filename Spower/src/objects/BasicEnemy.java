@@ -13,7 +13,7 @@ public class BasicEnemy extends Enemy{
 	private static final int rarity = 100;
 	private static final int price = 10;
 	
-	private static final Image image = new ImageIcon("WorstEnemy.png").getImage();
+	private static final Image image = new ImageIcon("Graphics\\WorstEnemy.png").getImage();
 	
 	public BasicEnemy(Point p, Point[] path, Handler handler, Hud hud) {
 		super((int)p.getX(), (int)p.getY(), health, speed, size, size, rarity, price, hud, path, handler, ID.BasicEnemy);
