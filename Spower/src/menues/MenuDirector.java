@@ -89,6 +89,8 @@ public class MenuDirector {
 			switch(mapSelector.mouseReleased(mouseX, mouseY)) {
 				case MapSelector.FIRST_BUTTON:
 					game.setGameState(Game.gameState.editor);
+					game.setEditorMap(mapSelector.getMap(0)+ ".txt");
+					System.out.print(mapSelector.getMap(0));
 					break;
 					
 				case MapSelector.SECOND_BUTTON:

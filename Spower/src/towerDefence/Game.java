@@ -99,6 +99,9 @@ public class Game extends JPanel implements Runnable{
 	public void setMap(String mapName) {
 		map.makeMap(mapName);
 	}
+	public void setEditorMap(String mapName){
+		editor.setMap(mapName);
+	}
 	
 	public void reset() {
 		hud.reset();

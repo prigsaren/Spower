@@ -64,6 +64,10 @@ public class MapSelector extends Menu{
 		slide--;
 	}
 	
+	protected String getMap(int mapNr){
+		return componentList.get(slide+mapNr);
+	}
+	
 	protected void findMaps() {
 		File folder = new File("Maps");
 		File[] listOfFiles = folder.listFiles();

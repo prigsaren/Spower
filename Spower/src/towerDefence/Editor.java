@@ -15,8 +15,8 @@ public class Editor {
 	private Image pathImage = new ImageIcon("Graphics\\path.png").getImage();
 	private Image startPathImage = new ImageIcon("Graphics\\startPath.png").getImage();
 	
-	private final int blockSize = Window.WIDTH/17;
-	private final int hudWidth = Window.WIDTH*2/17 + Window.WIDTH%17;
+	private final int blockSize = Window.WINDOW_WIDTH/17;
+	private final int hudWidth = Window.WINDOW_WIDTH*2/17 + Window.WINDOW_WIDTH%17;
 	
 	private int[][] map = new int[15][9];
 	
@@ -33,6 +33,9 @@ public class Editor {
 	private Painter painter = new Painter();
 	
 	public void render(Graphics g) {
+		
+		System.out.println("rendering");
+		
 		for(int i = 1; i <= 9 ; i++) {
 			g.drawLine(0, i*blockSize, blockSize*15, i * blockSize);
 		}
@@ -50,26 +53,26 @@ public class Editor {
 		}
 		
 		if(donePressed)
-			g.drawImage(hudDone, Window.WIDTH-hudWidth, 0, hudWidth, Window.HEIGHT, null);
+			g.drawImage(hudDone, Window.WINDOW_WIDTH-hudWidth, 0, hudWidth, Window.WINDOW_HEIGHT, null);
 		else
-			g.drawImage(hud, Window.WIDTH-hudWidth, 0, hudWidth, Window.HEIGHT, null);
+			g.drawImage(hud, Window.WINDOW_WIDTH-hudWidth, 0, hudWidth, Window.WINDOW_HEIGHT, null);
 		
-		g.drawImage(pathImage, Window.WIDTH-hudWidth + (hudWidth-blockSize)/2, (int)Math.round(Window.HEIGHT * (double)200/1080), blockSize, blockSize, null);
+		g.drawImage(pathImage, Window.WINDOW_WIDTH-hudWidth + (hudWidth-blockSize)/2, (int)Math.round(Window.WINDOW_HEIGHT * (double)200/1080), blockSize, blockSize, null);
 		
 		if(needStart == true)
-			g.drawImage(startPathImage, Window.WIDTH-hudWidth + (hudWidth-blockSize)/2, (int)Math.round(Window.HEIGHT * (double)500/1080), blockSize, blockSize, null);
+			g.drawImage(startPathImage, Window.WINDOW_WIDTH-hudWidth + (hudWidth-blockSize)/2, (int)Math.round(Window.WINDOW_HEIGHT * (double)500/1080), blockSize, blockSize, null);
 		
 		g.setColor(Color.DARK_GRAY);
-		g.fillRect(Window.WIDTH-hudWidth + (hudWidth-blockSize)/2, (int)Math.round(Window.HEIGHT * (double)350/1080), blockSize, blockSize);
+		g.fillRect(Window.WINDOW_WIDTH-hudWidth + (hudWidth-blockSize)/2, (int)Math.round(Window.WINDOW_HEIGHT * (double)350/1080), blockSize, blockSize);
 		
 		if(selectedType == Map.PATH)
-			g.drawImage(pathImage, Window.WIDTH-hudWidth + (hudWidth-blockSize)/2, (int)Math.round(Window.HEIGHT * (double)800/1080), blockSize, blockSize, null);
+			g.drawImage(pathImage, Window.WINDOW_WIDTH-hudWidth + (hudWidth-blockSize)/2, (int)Math.round(Window.WINDOW_HEIGHT * (double)800/1080), blockSize, blockSize, null);
 		
 		if(selectedType == Map.NOTHING) 
-			g.fillRect(Window.WIDTH-hudWidth + (hudWidth-blockSize)/2, (int)Math.round(Window.HEIGHT * (double)800/1080), blockSize, blockSize);
+			g.fillRect(Window.WINDOW_WIDTH-hudWidth + (hudWidth-blockSize)/2, (int)Math.round(Window.WINDOW_HEIGHT * (double)800/1080), blockSize, blockSize);
 		
 		if(selectedType == Map.START)
-			g.drawImage(startPathImage, Window.WIDTH-hudWidth + (hudWidth-blockSize)/2, (int)Math.round(Window.HEIGHT * (double)800/1080), blockSize, blockSize, null);
+			g.drawImage(startPathImage, Window.WINDOW_WIDTH-hudWidth + (hudWidth-blockSize)/2, (int)Math.round(Window.WINDOW_HEIGHT * (double)800/1080), blockSize, blockSize, null);
 		
 		if(needName) {
 			System.out.println(mapName);
