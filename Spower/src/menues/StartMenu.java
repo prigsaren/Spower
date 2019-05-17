@@ -8,9 +8,9 @@ import javax.swing.*;
 public class StartMenu extends Menu{
 	
 	
-	private final Button playButton = new Button(559,545,1360,615, FIRST_BUTTON);
-	private final Button editorButton = new Button(560,671,1361,741, SECOND_BUTTON);
-	private final Button creditsButton = new Button(560,796,1361,866, THIRD_BUTTON);
+	private final Button playButton = new Button((int)(559.0/1920*WINDOW_WIDTH), (int)(545.0/1080*WINDOW_HEIGHT), (int)(1361.0/1920*WINDOW_WIDTH), (int)(615.0/1080*WINDOW_HEIGHT), FIRST_BUTTON);
+	private final Button editorButton = new Button((int)(559.0/1920*WINDOW_WIDTH), (int)(671.0/1080*WINDOW_HEIGHT), (int)(1361.0/1920*WINDOW_WIDTH), (int)(741.0/1080*WINDOW_HEIGHT), SECOND_BUTTON);
+	private final Button creditsButton = new Button((int)(559.0/1920*WINDOW_WIDTH), (int)(796.0/1080*WINDOW_HEIGHT), (int)(1361.0/1920*WINDOW_WIDTH), (int)(866.0/1080*WINDOW_HEIGHT), THIRD_BUTTON);
 	
 	
 	private Button[] buttons = {playButton, editorButton, creditsButton};
@@ -22,6 +22,7 @@ public class StartMenu extends Menu{
 	
 	
 	public StartMenu() {
+//		System.out.println((559.0/1920);
 		super.setButtons(buttons);
 	}
 	

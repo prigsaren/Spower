@@ -18,9 +18,9 @@ public class MapSelector extends Menu{
 //	private Button backwardButton = new Button();
 //	private Button exitButton= new Button();
 //	private Button newButton = new Button();
-	private Button map1Button = new Button(547 , 372, 1338,411, FIRST_BUTTON);
-	private Button map2Button = new Button(547,501,1338,599, SECOND_BUTTON);
-	private Button map3Button = new Button(547, 631, 1338, 729, THIRD_BUTTON);
+	private Button map1Button = new Button((int)(547.0/1920*WINDOW_WIDTH), (int)(372.0/1080*WINDOW_HEIGHT), (int)(1338.0/1920*WINDOW_WIDTH), (int)(411.0/1080*WINDOW_HEIGHT), FIRST_BUTTON);
+	private Button map2Button = new Button((int)(547.0/1920*WINDOW_WIDTH), (int)(501.0/1080*WINDOW_HEIGHT), (int)(1338.0/1920*WINDOW_WIDTH), (int)(599.0/1080*WINDOW_HEIGHT), SECOND_BUTTON);
+	private Button map3Button = new Button((int)(547.0/1920*WINDOW_WIDTH), (int)(631.0/1080*WINDOW_HEIGHT), (int)(1338.0/1920*WINDOW_WIDTH), (int)(729.0/1080*WINDOW_HEIGHT), THIRD_BUTTON);
 	
 	private Button[] buttons = {map1Button, map2Button, map3Button};
 	
@@ -32,11 +32,9 @@ public class MapSelector extends Menu{
 	
 	private Painter painter = new Painter();
 	
-	
 	public MapSelector() {
 		super.setButtons(buttons);
 	}
-	
 	
 	public void render(Graphics g, int x, int y, int width, int height) {
 		
@@ -59,8 +57,14 @@ public class MapSelector extends Menu{
 		if(slide*3+2 < componentList.size())
 			painter.drawString(g, componentList.get(slide*3+2).replaceAll(".txt", ""), (int) Math.round(x+width * (double)150/1060), (int) Math.round(y+height * (double)470/640), (int)Math.round(width * (double)35/1060), (int)Math.round(height * (double)50/640));
 	}
+	protected void increaseSlide(){
+		slide++;
+	}
+	protected void decreaseSlide(){
+		slide--;
+	}
 	
-	public void findMaps() {
+	protected void findMaps() {
 		File folder = new File("Maps");
 		File[] listOfFiles = folder.listFiles();
 		LinkedList<String> tempList = new LinkedList<>();
