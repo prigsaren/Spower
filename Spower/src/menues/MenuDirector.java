@@ -85,22 +85,18 @@ public class MenuDirector {
 					
 			}
 		}
-		else  {
+		else 
 			switch(mapSelector.mouseReleased(mouseX, mouseY)) {
-				case MapSelector.FIRST_BUTTON:
-					game.setGameState(Game.gameState.editor);
-					game.setEditorMap(mapSelector.getMap(0)+ ".txt");
-					System.out.print(mapSelector.getMap(0));
+
+				case MapSelector.LEFT:
 					break;
 					
-				case MapSelector.SECOND_BUTTON:
-					game.setGameState(Game.gameState.editor);
+				case MapSelector.RIGHT:
 					break;
-					
-				case MapSelector.THIRD_BUTTON:
-					game.setGameState(Game.gameState.editor);
+				
+				case MapSelector.NONE:
 					break;
-					
+			
 				case MapSelector.NEW:
 					game.setGameState(Game.gameState.editor);
 					break;
@@ -108,6 +104,12 @@ public class MenuDirector {
 				case MapSelector.BACK:
 					stateOfGame = gameState.startMenu;
 					break;
+					
+				default:
+					if(mapSelector.getMap(mapSelector.mouseReleased(mouseX, mouseY) -4) != null) {
+						game.setGameState(Game.gameState.editor);
+						game.setEditorMap(mapSelector.getMap(mapSelector.mouseReleased(mouseX, mouseY) -4));
+					
 					
 			
 			}

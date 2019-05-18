@@ -3,12 +3,19 @@ package towerDefence;
 import java.awt.*;
 import java.io.*;
 import java.util.Scanner;
-
 import javax.swing.*;
-
 import tools.Painter;
+import tools.Button;
 
 public class Editor {
+	
+	
+//	(int)(x/1920.0 * Window.WINDOW_WIDTH), (int)(y/1080.0) * Window.WINDOW_HEIGHT,(int)(x2/1920.0)* Window.WINDOW_WIDTH,(int)(y2/1080.0)* Window.WINDOW_HEIGHT
+	Button path = new Button((int)(1743/1920.0 * Window.WINDOW_WIDTH), (int)(200/1080.0 * Window.WINDOW_HEIGHT),(int)(1854/1920.0* Window.WINDOW_WIDTH),(int)(311/1080.0* Window.WINDOW_HEIGHT), Map.PATH);
+	Button startPath = new Button((int)(1743/1920.0 * Window.WINDOW_WIDTH), (int)(351/1080.0 * Window.WINDOW_HEIGHT),(int)(1854/1920.0* Window.WINDOW_WIDTH),(int)(461/1080.0* Window.WINDOW_HEIGHT), Map.NOTHING);
+	Button nothing = new Button((int)(1743/1920.0 * Window.WINDOW_WIDTH), (int)(500/1080.0 * Window.WINDOW_HEIGHT),(int)(1854/1920.0* Window.WINDOW_WIDTH),(int)(611/1080.0* Window.WINDOW_HEIGHT), Map.START_PATH);
+
+	Button[] buttons = {path, startPath, nothing};
 	
 	private Image hud = new ImageIcon("Graphics\\editor.png").getImage();
 	private Image hudDone = new ImageIcon("Graphics\\editorDone.png").getImage();
@@ -18,23 +25,19 @@ public class Editor {
 	private final int blockSize = Window.WINDOW_WIDTH/17;
 	private final int hudWidth = Window.WINDOW_WIDTH*2/17 + Window.WINDOW_WIDTH%17;
 	
+	private int selectedType = -1;
 	private int[][] map = new int[15][9];
 	
 	private boolean needStart = true;
-	
 	private boolean donePressed = false;
-	
-	private int selectedType = -1;
-	
-	private String mapName = "";
-	
 	private boolean needName = false;
 	
+	
+	private String mapName = "";
+
 	private Painter painter = new Painter();
 	
 	public void render(Graphics g) {
-		
-		System.out.println("rendering");
 		
 		for(int i = 1; i <= 9 ; i++) {
 			g.drawLine(0, i*blockSize, blockSize*15, i * blockSize);
@@ -47,7 +50,7 @@ public class Editor {
 				if(map[i][i2] == Map.PATH)
 					g.drawImage(pathImage, i*blockSize, i2 * blockSize, blockSize, blockSize,null);
 				
-				else if(map[i][i2] == Map.START)
+				else if(map[i][i2] == Map.START_PATH)
 					g.drawImage(startPathImage, i*blockSize, i2 * blockSize, blockSize, blockSize,null);
 			}
 		}
@@ -71,7 +74,7 @@ public class Editor {
 		if(selectedType == Map.NOTHING) 
 			g.fillRect(Window.WINDOW_WIDTH-hudWidth + (hudWidth-blockSize)/2, (int)Math.round(Window.WINDOW_HEIGHT * (double)800/1080), blockSize, blockSize);
 		
-		if(selectedType == Map.START)
+		if(selectedType == Map.START_PATH)
 			g.drawImage(startPathImage, Window.WINDOW_WIDTH-hudWidth + (hudWidth-blockSize)/2, (int)Math.round(Window.WINDOW_HEIGHT * (double)800/1080), blockSize, blockSize, null);
 		
 		if(needName) {
@@ -87,28 +90,35 @@ public class Editor {
 		needName = false;
 	}
 	
-	public void tick() {
-	}
 	public void setSelectedType(int selectedType) {
-		if((selectedType != Map.START || needStart) && !needName)
+		if((selectedType != Map.START_PATH || needStart) && !needName)
 			this.selectedType = selectedType;
 	}
 	
-	public void pressed(int x, int y) {
+	public void pressed(int mouseX, int mouseY) {
 		
-		if(selectedType != -1 && !needName) {
-			if(selectedType == Map.START) {
+		for(int i = 0; i < buttons.length; i++) {
+			if(buttons[i].isOnButton(mouseX, mouseY)) {
+				System.out.println("pressed");
+				selectedType = buttons[i].getusageNr();
+			break;
+		}
+		}
+		
+		
+		if(selectedType != -1 && !needName && mouseX < 15/17.0 * Window.WINDOW_WIDTH) {
+			if(selectedType == Map.START_PATH) {
 				needStart = false;
-				map[x/blockSize][y/blockSize] = selectedType;
+				map[mouseX/blockSize][mouseY/blockSize] = selectedType;
 				selectedType = -1;
 			}
 			
-			else if(map[x/blockSize][y/blockSize] == Map.START) {
+			else if(map[mouseX/blockSize][mouseY/blockSize] == Map.START_PATH) {
 				needStart = true;
-				map[x/blockSize][y/blockSize] = selectedType;
+				map[mouseX/blockSize][mouseY/blockSize] = selectedType;
 			}
 			else
-				map[x/blockSize][y/blockSize] = selectedType;
+				map[mouseX/blockSize][mouseY/blockSize] = selectedType;
 			}
 	}
 
@@ -141,6 +151,7 @@ public class Editor {
 			} catch (IOException e) {}
 		}
 	}
+	
 	public void setMap(String mapName) {
 		
 		this.mapName = mapName;
@@ -152,7 +163,7 @@ public class Editor {
 			for(int y = 0; y < 9; y++) {
 				for(int x = 0; x < 15; x++) {
 					map[x][y] = scan.nextInt();
-					if(map[x][y] == Map.START)
+					if(map[x][y] == Map.START_PATH)
 						needStart = false;
 				}
 			}
@@ -160,9 +171,11 @@ public class Editor {
 			
 		} catch (FileNotFoundException e) {}
 	}
+	
 	public boolean needMapName() {
 			return needName;
 	}
+	
 	public boolean canChange() {
 		if(needName || needStart) {
 			System.out.println(needName + "  " + needStart);

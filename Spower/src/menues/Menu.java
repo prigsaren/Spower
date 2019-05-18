@@ -17,6 +17,7 @@ public class Menu {
 	protected static final int WINDOW_HEIGHT = Window.WINDOW_HEIGHT;
 	
 	protected int pressed = NONE;
+	protected int releasedNR = NONE;
 	
 	private Button[] buttons;
 	
@@ -27,18 +28,19 @@ public class Menu {
 	
 	protected int mouseReleased(int mouseX, int mouseY) {
 		
-		pressed = NONE;
-		
-		for(int i = 0; i < buttons.length; i++) {
-			if(buttons[i].isOnButton(mouseX, mouseY)) {
-				return buttons[i].getusageNr();
+		for(int i = 0; i < buttons.length && pressed != NONE && releasedNR == NONE; i++) {
+			if(buttons[i].isOnButton(mouseX, mouseY) && pressed == buttons[i].getusageNr()) {
+				releasedNR = buttons[i].getusageNr();
 			}
 		}
-		return NONE;
+		
+		pressed = NONE;
+		return releasedNR;
 		
 	}
 	
 	protected void mousePressed(int mouseX, int mouseY) {
+		releasedNR = NONE;
 		
 		for(int i = 0; i < buttons.length; i++) {
 			if(buttons[i].isOnButton(mouseX, mouseY)) {

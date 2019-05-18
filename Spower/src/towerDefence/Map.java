@@ -23,7 +23,7 @@ public class Map {
 	
 	public static final int NOTHING = 0;
 	public static final int PATH = 1;
-	public static final int START = 2;
+	public static final int START_PATH = 2;
 	
 	
 	public void makeMap(String mapName) {
@@ -39,7 +39,7 @@ public class Map {
 				for(int i2 = 0; i2 < 15; i2++) {
 					map[i2][i] = scan.nextInt();
 					
-					if(map[i2][i] == START)
+					if(map[i2][i] == START_PATH)
 						startPoint = new Point(i2*blockSize, i*blockSize);
 					
 					else if(map[i2][i] ==  PATH) {
@@ -129,7 +129,7 @@ public class Map {
 	public void render(Graphics g) {
 		for(int i = 0; i < 9; i++) {
 			for(int i2 = 0; i2 < 15; i2++) {
-				if(map[i2][i] == PATH || map[i2][i] == START) {
+				if(map[i2][i] == PATH || map[i2][i] == START_PATH) {
 					g.drawImage(pathImage, i2*blockSize, i*blockSize, blockSize, blockSize, null);
 										
 				}

@@ -16,13 +16,13 @@ public class MapSelector extends Menu{
 	
 //	private Button forwardButton = new Button();
 //	private Button backwardButton = new Button();
-//	private Button exitButton= new Button();
-//	private Button newButton = new Button();
-	private Button map1Button = new Button((int)(547.0/1920*WINDOW_WIDTH), (int)(372.0/1080*WINDOW_HEIGHT), (int)(1338.0/1920*WINDOW_WIDTH), (int)(411.0/1080*WINDOW_HEIGHT), FIRST_BUTTON);
-	private Button map2Button = new Button((int)(547.0/1920*WINDOW_WIDTH), (int)(501.0/1080*WINDOW_HEIGHT), (int)(1338.0/1920*WINDOW_WIDTH), (int)(599.0/1080*WINDOW_HEIGHT), SECOND_BUTTON);
-	private Button map3Button = new Button((int)(547.0/1920*WINDOW_WIDTH), (int)(631.0/1080*WINDOW_HEIGHT), (int)(1338.0/1920*WINDOW_WIDTH), (int)(729.0/1080*WINDOW_HEIGHT), THIRD_BUTTON);
+	private Button newButton= new Button((int)(1316/1920.0 * WINDOW_WIDTH), (int)(291/1080.0 * WINDOW_HEIGHT), (int)(1375/1920.0 * WINDOW_WIDTH), (int)(350/1080.0 * WINDOW_HEIGHT), NEW);
+	private Button exitButton = new Button((int)(521/1920.0 * WINDOW_WIDTH), (int)(292/1080.0 * WINDOW_HEIGHT), (int)(588/1920.0 * WINDOW_WIDTH), (int)(347/1080.0 * WINDOW_HEIGHT), BACK);
+	private Button map1Button = new Button((int)(547/1920.0 * WINDOW_WIDTH), (int)(372/1080.0 * WINDOW_HEIGHT), (int)(1338/1920.0 * WINDOW_WIDTH), (int)(471/1080.0 * WINDOW_HEIGHT), FIRST_BUTTON);
+	private Button map2Button = new Button((int)(547/1920.0 * WINDOW_WIDTH), (int)(501/1080.0 * WINDOW_HEIGHT), (int)(1338/1920.0 * WINDOW_WIDTH), (int)(599/1080.0 * WINDOW_HEIGHT), SECOND_BUTTON);
+	private Button map3Button = new Button((int)(547/1920.0 * WINDOW_WIDTH), (int)(631/1080.0 * WINDOW_HEIGHT), (int)(1338/1920.0 * WINDOW_WIDTH), (int)(729/1080.0 * WINDOW_HEIGHT), THIRD_BUTTON);
 	
-	private Button[] buttons = {map1Button, map2Button, map3Button};
+	private Button[] buttons = {map1Button, map2Button, map3Button, exitButton, newButton};
 	
 	private Image chooseMap = new ImageIcon("Graphics\\chooseMap.png").getImage();
 	private Image chooseMapLeft = new ImageIcon("Graphics\\chooseMapLeft.png").getImage();
@@ -38,7 +38,7 @@ public class MapSelector extends Menu{
 	
 	public void render(Graphics g, int x, int y, int width, int height) {
 		
-		if(pressed == NONE)
+		if(pressed == NONE || pressed == FIRST_BUTTON || pressed == SECOND_BUTTON || pressed == THIRD_BUTTON)
 			g.drawImage(chooseMap, x, y, width, height, null);
 		else if(pressed == LEFT)
 			g.drawImage(chooseMapLeft, x, y, width, height, null);
@@ -65,7 +65,10 @@ public class MapSelector extends Menu{
 	}
 	
 	protected String getMap(int mapNr){
-		return componentList.get(slide+mapNr);
+		
+		if(slide + mapNr < componentList.size())
+			return componentList.get(slide + mapNr);
+		return null;
 	}
 	
 	protected void findMaps() {

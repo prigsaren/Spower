@@ -6,8 +6,8 @@ public class Button {
 	private Line[] line;
 	private int x;
 	private int y;
-	private int lastX;
-	private int lastY;
+	private int endX;
+	private int endY;
 	private int usageNr;
 	
 	public Button(Line[] line, int x, int usageNr) {
@@ -16,18 +16,20 @@ public class Button {
 		this.usageNr = usageNr;
 	}
 	
-	public Button(int x, int y, int lastX, int lastY, int usageNr) {
+	public Button(int x, int y, int endX, int endY, int usageNr) {
 		this.x = x;
 		this.y = y;
-		this.lastX = lastX;
-		this.lastY = lastY;
+		this.endX = endX;
+		this.endY = endY;
 		this.usageNr = usageNr;
+		
+		
 	}
 	
 	public boolean isOnButton(int mousePosX, int mousePosY) {
 		if(line != null && mousePosY > line[mousePosX-x].getStartY() && mousePosY < line[mousePosX-x].getEndY())
 			return true;
-		else if(mousePosX > x && mousePosX < lastX && mousePosY > y && mousePosY < lastY)
+		else if(mousePosX > x && mousePosX < endX && mousePosY > y && mousePosY < endY)
 			return true;
 		return false;
 	}

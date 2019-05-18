@@ -13,7 +13,7 @@ public class Game extends JPanel implements Runnable{
 	MenuDirector menuDirector = new MenuDirector(this);
 	Handler handler = new Handler();
 	Editor editor = new Editor();
-	Mouse mouse = new Mouse(hud, map, menuDirector, this);
+	Mouse mouse = new Mouse(hud, map, menuDirector, this, editor);
 	KeyInput keyInput = new KeyInput(this, editor);
 	Window window = new Window(this, mouse, keyInput);
 	
@@ -76,9 +76,6 @@ public class Game extends JPanel implements Runnable{
 			menuDirector.tick();
 		}
 		
-		else if(state == gameState.editor) {
-			editor.tick();
-		}
 	}
 	public void setGameState(gameState state){
 		this.state = state;

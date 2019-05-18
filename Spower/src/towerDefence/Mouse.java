@@ -17,7 +17,7 @@ public class Mouse implements MouseListener{
 	private Handler handler;
 	private Window window;
 	private Game game;
-	
+	private Editor editor;
 	
 	private ID id;
 	
@@ -29,11 +29,12 @@ public class Mouse implements MouseListener{
 	
 	private int pressedButtonNr = -1, chosenButton = -1;
 		
-	public Mouse(Hud hud, Map map, MenuDirector menuDirector, Game game) {
+	public Mouse(Hud hud, Map map, MenuDirector menuDirector, Game game, Editor editor) {
 		this.hud = hud;
 		this.map = map;
 		this.menuDirector = menuDirector;
 		this.game = game;
+		this.editor = editor;
 	}
 	
 	@Override
@@ -53,7 +54,10 @@ public class Mouse implements MouseListener{
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-//		System.out.println(e.getX() +"   " + e.getY());
+		if(game.getGameState() == gameState.editor)
+			editor.pressed(e.getX(), e.getY());
+			
+			System.out.println(e.getX() +"   " + e.getY());
 		
 		if(game.getGameState() == gameState.menu)
 			menuDirector.buttonPressed(e.getX(), e.getY());
