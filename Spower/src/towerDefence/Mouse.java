@@ -26,8 +26,7 @@ public class Mouse implements MouseListener{
 //	private int hudWidth = Window.WIDTH*2/17 + Window.WIDTH%17;
 	private int blockSize = Window.WIDTH/17;
 	
-	
-	private int pressedButtonNr = -1, chosenButton = -1;
+	private int startX, endX, startY, endY;
 		
 	public Mouse(Hud hud, Map map, MenuDirector menuDirector, Game game, Editor editor) {
 		this.hud = hud;
@@ -54,21 +53,34 @@ public class Mouse implements MouseListener{
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		if(game.getGameState() == gameState.editor)
-			editor.pressed(e.getX(), e.getY());
+		
+		if(e.getButton() == MouseEvent.BUTTON1) {
+			if(game.getGameState() == gameState.editor)
+				editor.pressed(e.getX(), e.getY());
+				
+				System.out.println(e.getX() +"   " + e.getY());
 			
-			System.out.println(e.getX() +"   " + e.getY());
-		
-		if(game.getGameState() == gameState.menu)
-			menuDirector.buttonPressed(e.getX(), e.getY());
-		
-		
+			if(game.getGameState() == gameState.menu)
+				menuDirector.buttonPressed(e.getX(), e.getY());
+		}
+		else if(e.getButton() == MouseEvent.BUTTON2) {
+			startX = e.getX();
+			startY = e.getY();
+		}
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		if(game.getGameState() == gameState.menu)
-			menuDirector.buttonReleased(e.getX(), e.getY());
+		if(e.getButton() == MouseEvent.BUTTON1) {
+			if(game.getGameState() == gameState.menu)
+				menuDirector.buttonReleased(e.getX(), e.getY());
+		}
+		else if(e.getButton() == MouseEvent.BUTTON2) {
+			endX = e.getX();
+			endY = e.getY();
+			
+			System.out.println("(int)(" + startX + "/1920.0 * WINDOW_WIDTH), (int)(" + startY + "/1080.0 * WINDOW_HEIGHT), (int)(" + endX + "/1920.0 * WINDOW_WIDTH), (int)(" + endY + "/1080.0 * WINDOW_HEIGHT)");
+		}
 	}
 	
 	public boolean canPlace() {

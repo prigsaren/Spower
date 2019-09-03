@@ -89,9 +89,11 @@ public class MenuDirector {
 			switch(mapSelector.mouseReleased(mouseX, mouseY)) {
 
 				case MapSelector.LEFT:
+					mapSelector.decreaseSlide();
 					break;
 					
 				case MapSelector.RIGHT:
+					mapSelector.increaseSlide();
 					break;
 				
 				case MapSelector.NONE:
@@ -106,14 +108,20 @@ public class MenuDirector {
 					break;
 					
 				default:
-					if(mapSelector.getMap(mapSelector.mouseReleased(mouseX, mouseY) -4) != null) {
-						game.setGameState(Game.gameState.editor);
-						game.setEditorMap(mapSelector.getMap(mapSelector.mouseReleased(mouseX, mouseY) -4));
-					
-					
-			
-			}
+					if (mapSelector.getMap(mapSelector.mouseReleased(mouseX, mouseY) -4) != null) {
+						if( stateOfGame == gameState.editorMapSelector) {
+							stateOfGame = gameState.startMenu;
+							game.setGameState(Game.gameState.editor);
+							game.setEditorMap(mapSelector.getMap(mapSelector.mouseReleased(mouseX, mouseY) -4));
+										
+						}
+						
+						else if(stateOfGame == gameState.gameMapSelector) {
+							game.setGameState(Game.gameState.game);
+//							game.setG
+						}
 		}
 	}
 	
+}
 }

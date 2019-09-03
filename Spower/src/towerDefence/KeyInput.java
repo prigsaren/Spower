@@ -1,7 +1,6 @@
 package towerDefence;
 
 import java.awt.event.*;
-import towerDefence.Game.*;
 
 public class KeyInput implements KeyListener{
 

@@ -11,7 +11,7 @@ public class Window extends JFrame{
 	
 //	private Color backGround = new Color(86,84,91);
 	
-	public Window(Game game, Mouse mouse, KeyInput keyInput) {
+	public Window(JPanel jpanel, Mouse mouse, KeyInput keyInput) {
 		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Tower Defence game");
@@ -19,7 +19,7 @@ public class Window extends JFrame{
 		setSize(WIDTH, HEIGHT);
 		addMouseListener(mouse);
 		addKeyListener(keyInput);
-		setContentPane(game);
+		setContentPane(jpanel);
 		setUndecorated(true);
 		getContentPane().setBackground(Color.DARK_GRAY);
 		setLocationRelativeTo(null);

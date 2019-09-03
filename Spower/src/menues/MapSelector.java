@@ -14,15 +14,15 @@ public class MapSelector extends Menu{
 	
 	private LinkedList<String> componentList = new LinkedList<>();
 	
-//	private Button forwardButton = new Button();
-//	private Button backwardButton = new Button();
+	private Button forwardButton = new Button((int)(1298/1920.0 * WINDOW_WIDTH), (int)(757/1080.0 * WINDOW_HEIGHT), (int)(1389/1920.0 * WINDOW_WIDTH), (int)(811/1080.0 * WINDOW_HEIGHT), RIGHT);
+	private Button backwardButton = new Button((int)(496/1920.0 * WINDOW_WIDTH), (int)(756/1080.0 * WINDOW_HEIGHT), (int)(591/1920.0 * WINDOW_WIDTH), (int)(811/1080.0 * WINDOW_HEIGHT), LEFT);
 	private Button newButton= new Button((int)(1316/1920.0 * WINDOW_WIDTH), (int)(291/1080.0 * WINDOW_HEIGHT), (int)(1375/1920.0 * WINDOW_WIDTH), (int)(350/1080.0 * WINDOW_HEIGHT), NEW);
 	private Button exitButton = new Button((int)(521/1920.0 * WINDOW_WIDTH), (int)(292/1080.0 * WINDOW_HEIGHT), (int)(588/1920.0 * WINDOW_WIDTH), (int)(347/1080.0 * WINDOW_HEIGHT), BACK);
 	private Button map1Button = new Button((int)(547/1920.0 * WINDOW_WIDTH), (int)(372/1080.0 * WINDOW_HEIGHT), (int)(1338/1920.0 * WINDOW_WIDTH), (int)(471/1080.0 * WINDOW_HEIGHT), FIRST_BUTTON);
 	private Button map2Button = new Button((int)(547/1920.0 * WINDOW_WIDTH), (int)(501/1080.0 * WINDOW_HEIGHT), (int)(1338/1920.0 * WINDOW_WIDTH), (int)(599/1080.0 * WINDOW_HEIGHT), SECOND_BUTTON);
 	private Button map3Button = new Button((int)(547/1920.0 * WINDOW_WIDTH), (int)(631/1080.0 * WINDOW_HEIGHT), (int)(1338/1920.0 * WINDOW_WIDTH), (int)(729/1080.0 * WINDOW_HEIGHT), THIRD_BUTTON);
 	
-	private Button[] buttons = {map1Button, map2Button, map3Button, exitButton, newButton};
+	private Button[] buttons = {map1Button, map2Button, map3Button, exitButton, newButton, forwardButton, backwardButton};
 	
 	private Image chooseMap = new ImageIcon("Graphics\\chooseMap.png").getImage();
 	private Image chooseMapLeft = new ImageIcon("Graphics\\chooseMapLeft.png").getImage();
@@ -58,10 +58,12 @@ public class MapSelector extends Menu{
 			painter.drawString(g, componentList.get(slide*3+2).replaceAll(".txt", ""), (int) Math.round(x+width * (double)150/1060), (int) Math.round(y+height * (double)470/640), (int)Math.round(width * (double)35/1060), (int)Math.round(height * (double)50/640));
 	}
 	protected void increaseSlide(){
-		slide++;
+		if((slide + 1) * 3 < componentList.size())
+			slide++;
 	}
 	protected void decreaseSlide(){
-		slide--;
+		if(slide > 0)
+			slide--;
 	}
 	
 	protected String getMap(int mapNr){
