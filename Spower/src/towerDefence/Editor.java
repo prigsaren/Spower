@@ -8,10 +8,10 @@ import javax.swing.*;
 
 public class Editor {
 	
-	private Image hud = new ImageIcon("editor.png").getImage();
-	private Image hudDone = new ImageIcon("editorDone.png").getImage();
-	private Image pathImage = new ImageIcon("path.png").getImage();
-	private Image startPathImage = new ImageIcon("startPath.png").getImage();
+	private Image hud = new ImageIcon("res/editor.png").getImage();
+	private Image hudDone = new ImageIcon("res/editorDone.png").getImage();
+	private Image pathImage = new ImageIcon("res/path.png").getImage();
+	private Image startPathImage = new ImageIcon("res/startPath.png").getImage();
 	
 	private final int blockSize = Window.WIDTH/17;
 	private final int hudWidth = Window.WIDTH*2/17 + Window.WIDTH%17;
@@ -120,9 +120,9 @@ public class Editor {
 			FileWriter fw;
 			try {
 				if(mapName.contains(".txt"))
-					fw = new FileWriter("Maps\\" + mapName);
+					fw = new FileWriter("res/Maps\\" + mapName);
 				else
-					fw = new FileWriter("Maps\\" + mapName + ".txt");
+					fw = new FileWriter("res/Maps\\" + mapName + ".txt");
 				BufferedWriter bw = new BufferedWriter(fw);
 				
 				for(int y = 0; y < 9; y++) {
@@ -141,7 +141,7 @@ public class Editor {
 		this.mapName = mapName;
 		
 		try {
-			FileReader fr = new FileReader("Maps\\" + mapName);
+			FileReader fr = new FileReader("res/Maps\\" + mapName);
 			Scanner scan = new Scanner(fr);
 			
 			for(int y = 0; y < 9; y++) {
@@ -153,7 +153,9 @@ public class Editor {
 			}
 			scan.close();
 			
-		} catch (FileNotFoundException e) {}
+		} catch (FileNotFoundException e) {
+			System.out.println(e);
+		}
 	}
 	public boolean needMapName() {
 			return needName;

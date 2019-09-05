@@ -23,7 +23,7 @@ public class Painter {
 				String string = s.charAt(i) + "";
 				
 				if(!string.equals(" ")) {
-					Image image = new ImageIcon("Letters/" + s.toUpperCase().charAt(i)+ ".png").getImage();
+					Image image = new ImageIcon("res/Letters/" + s.toUpperCase().charAt(i)+ ".png").getImage();
 					g.drawImage(image, x, y, (int)Math.round(width * image.getWidth(null)/60.0), height, null);
 					x += (int)Math.round(width * image.getWidth(null)/60.0 + width/5.0);
 				}

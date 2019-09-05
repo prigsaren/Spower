@@ -59,7 +59,7 @@ public class Game extends JPanel implements Runnable{
 
 		startMenu.clearMapSelectorComponentList();
 		
-		File folder = new File("Maps");
+		File folder = new File("res/Maps");
 		File[] listOfFiles = folder.listFiles();
 		LinkedList<String> tempList = new LinkedList<>();
 		

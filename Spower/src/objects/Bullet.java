@@ -17,7 +17,7 @@ public class Bullet extends GameObject{
 	private double toMoveX = 0;
 	private double toMoveY = 0;
 	
-	private Image star = new ImageIcon("star.png").getImage();
+	private Image star = new ImageIcon("res//star.png").getImage();
 	
 	Handler handler;
 	private Enemy enemy;

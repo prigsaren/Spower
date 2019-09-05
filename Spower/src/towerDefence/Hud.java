@@ -25,12 +25,12 @@ public class Hud {
 	int selected = -1;
 	private int missX, missY;
 	
-	private Image hud = new ImageIcon("hud.png").getImage();
-	private Image hudStart = new ImageIcon("hudStart.png").getImage();
-	private Image hudOverlay = new ImageIcon("hudOverlay.png").getImage();
-	private Image health = new ImageIcon("health.png").getImage();
+	private Image hud = new ImageIcon("res/hud.png").getImage();
+	private Image hudStart = new ImageIcon("res/hudStart.png").getImage();
+	private Image hudOverlay = new ImageIcon("res/hudOverlay.png").getImage();
+	private Image health = new ImageIcon("res/health.png").getImage();
 	
-	private Image cirkle = new ImageIcon("redCirkle.png").getImage();
+	private Image cirkle = new ImageIcon("res/redCirkle.png").getImage();
 	
 	private Color blue = new Color(8,94,126);
 	

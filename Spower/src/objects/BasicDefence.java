@@ -8,7 +8,7 @@ import towerDefence.Window;
 public class BasicDefence extends Aim{
 	
 //	public static final Image image = new ImageIcon("basicTower.png").getImage();
-	public static final Image image = new ImageIcon("ship.png").getImage();
+	public static final Image image = new ImageIcon("res//ship.png").getImage();
 	public static final int height = Window.WIDTH/17;
 	public static final int width = height;
 	private static final int price = 250;

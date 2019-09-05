@@ -16,8 +16,8 @@ public class Map {
 	
 	Random rand = new Random();
 
-	private Image back = new ImageIcon("back2.png").getImage();
-	private Image pathImage = new ImageIcon("path.png").getImage();
+	private Image back = new ImageIcon("res/back2.png").getImage();
+	private Image pathImage = new ImageIcon("res/path.png").getImage();
 
 	private int blockSize = Window.WIDTH/17;
 	
@@ -32,7 +32,7 @@ public class Map {
 		
 		
 		try {
-			FileReader fr = new FileReader("Maps\\" + mapName);
+			FileReader fr = new FileReader("res/Maps\\" + mapName);
 			Scanner scan = new Scanner(fr);
 			
 			for(int i = 0; i < 9; i++) {

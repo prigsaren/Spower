@@ -14,12 +14,11 @@ public class StartMenu{
 	public static final int CREDITS = 3;
 	
 	
-	private Image deafult = new ImageIcon("titleScreen_deafult.png").getImage();
-	private Image playPressed = new ImageIcon("titleScreen_play.png").getImage();
-	private Image editorPressed = new ImageIcon("titleScreen_Editor.png").getImage();
-	private Image creditsPressed = new ImageIcon("titleScreen_Credits.png").getImage();
-	
-	private Image stars = new ImageIcon("stars.png").getImage();
+	private Image deafult = new ImageIcon("res/titleScreen_deafult.png").getImage();
+	private Image playPressed = new ImageIcon("res/titleScreen_play.png").getImage();
+	private Image editorPressed = new ImageIcon("res/titleScreen_Editor.png").getImage();
+	private Image creditsPressed = new ImageIcon("res/titleScreen_Credits.png").getImage();
+	private Image stars = new ImageIcon("res/stars.png").getImage();
 	
 	private double xDouble = 0;
 	private int x;
