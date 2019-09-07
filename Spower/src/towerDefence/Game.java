@@ -41,8 +41,7 @@ public class Game extends JPanel implements Runnable{
 	
 	public static void main(String[]args) {
 		System.out.print("Hello World!\n");
-		Game game = new Game();
-		game.game();
+		new Game().game();
 	}
 	
 	private void game() {
