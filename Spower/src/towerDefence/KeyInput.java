@@ -19,20 +19,20 @@ public class KeyInput implements KeyListener{
 			if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
 				if(game.getGameState() == gameState.game)
 					game.reset();
-				game.setGameState(gameState.startMenu);
+				game.setGameState(gameState.Menu);
 			}
 			
 			if(game.getGameState() == gameState.editor && editor.needMapName()) {
 				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
 					if(editor.addLetter(null))
-						game.setGameState(gameState.startMenu);
+						game.setGameState(gameState.Menu);
 				}
 				else 
 					editor.addLetter(e.getKeyChar() + "");
 				
 			}
 		}
-		else if(game.getGameState() == gameState.startMenu) {
+		else if(game.getGameState() == gameState.Menu) {
 			
 			if(e.getKeyCode() == KeyEvent.VK_ESCAPE)
 				System.exit(0);

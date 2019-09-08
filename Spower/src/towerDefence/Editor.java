@@ -71,7 +71,7 @@ public class Editor {
 		
 		if(needName) {
 			System.out.println(mapName);
-			painter.drawString(g, mapName, 500, 500, 50, 50);
+			painter.drawString(g, mapName, 500, 500, 50);
 		}
 		
 	}

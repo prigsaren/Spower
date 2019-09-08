@@ -14,7 +14,7 @@ public class Painter {
 	
 	int x;
 	
-	public void drawString(Graphics g, String s, int x, int y, int width, int height) {
+	public void drawString(Graphics g, String s, int x, int y, int height) {
 		if(s != null) {
 			this.x = x;
 			
@@ -24,11 +24,11 @@ public class Painter {
 				
 				if(!string.equals(" ")) {
 					Image image = new ImageIcon("res/Letters/" + s.toUpperCase().charAt(i)+ ".png").getImage();
-					g.drawImage(image, x, y, (int)Math.round(width * image.getWidth(null)/60.0), height, null);
-					x += (int)Math.round(width * image.getWidth(null)/60.0 + width/5.0);
+					g.drawImage(image, x, y, (int)Math.round(image.getWidth(null)*height/(double)image.getHeight(null))+1, height, null);
+					x += (int)Math.round((image.getWidth(null)*height/(double)image.getHeight(null) + height/10));
 				}
 				else {
-					x += width;
+					x += height/2;
 				}
 				}
 			
